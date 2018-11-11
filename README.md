@@ -265,16 +265,6 @@ PrintHeapAtGC(GC前后堆信息)
 > verbose - 
 adj.冗长的；啰嗦的；唠叨的。详细；罗嗦的；详细的
 
-## OOM类型
-
-* Java Heap 溢出（Java heap spacess）
-* 虚拟机栈和本地方法栈溢出（StackOverflowError）
-* 运行时常量池溢出（PermGen space）
-* 方法区溢出 （PermGen space）
-* 线程过多（unable to creat new native thread）
-* GC效率低下 (GC overhead limit exceeded)
-* 直接内存内存溢出 (Direct buffer memory)
-* 数组过大 （Requested array size exceeds VM limit）>=Integer.MAX_VALUE-1时
 
 ## 非堆内存
 
@@ -490,4 +480,53 @@ Thread Local Allocation Buffer，线程本地分配缓存。
 
 
 
+
+---
+---
+---
+# 分析 java 堆
+
+
+## OOM类型
+
+* Java Heap 溢出（Java heap spacess）
+* 虚拟机栈和本地方法栈溢出（StackOverflowError）
+* 运行时永久区溢出（PermGen space），如常量池等
+* 方法区溢出 （PermGen space）
+* 线程过多（unable to creat new native thread）
+* GC效率低下 (GC overhead limit exceeded)
+* 直接内存内存溢出 (Direct buffer memory)
+* 数组过大 （Requested array size exceeds VM limit）>=Integer.MAX_VALUE-1时
+
+## string 虚拟机中实现
+
+* 不变性
+* intern
+
+jdk6存在内存泄漏，string的长度和value无关。jdk7已解决。
+
+### string常量池
+
+jdk6之前，属于永久区。jdk7后，移到了堆中。
+
+```java
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<String>();
+
+        int i = 0;
+
+        while(true){
+            list.add(("dd".repeat(1000)+String.valueOf(i++)).intern());
+        }
+    }
+```
+
+* jdk6报: OOM：permgen space
+* JDK7后报：java.lang.OutOfMemoryError: Java heap space
+
+
+---
+---
+---
+# 锁和并发
 
