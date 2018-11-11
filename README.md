@@ -367,7 +367,73 @@ Client / Server /
 ---
 # 垃圾收集器和内存分配
 
+## 串行回收器
 
+-XX:+UseSerialGC，老生代和新生代都使用。
+
+## 并行回收器
+
+### 新生代 ParallelGC 回收器
+
+复制算法
+
+### 老生代 ParallelOldGC 回收器
+
+关注吞吐量。
+
+## CMS回收器
+
+标记清除算法。
+
+![](img-jvm/cms.png)
+
+* 初始标记：STW，标记根对象
+* 并发标记：标记所有对象
+* 预清理：清理前准备以及控制停顿时间
+* 重新标记：STW，修正并发标记数据
+* 并发清理
+* 并发重制
+
+除了那2个STW(图片中全红的)，其他时候可以和应用线程并发执行。
+
+## G1回收器(Garbage First)
+
+jdk1.7的并行的分代垃圾回收器，依然区分年轻代和老生代，依然有eden区和servivor区。
+
+没有采用传统物理隔离的新生代和老年代的布局方式，仅仅以逻辑上划分为新生代和老年代，选择的将 Java 堆区划分为 2048 个大小相同的独立 Region 块。
+
+![g1](img-jvm/g1.png)
+
+### 对象进入老生代
+
+* 多次gc存活
+* 大对象直接进入
+  * 超过from/to大小
+  * 超过 **PertenureSizeThredhold** 参数大小
+
+### TLAB上分配对象
+
+Thread Local Allocation Buffer，线程本地分配缓存。
+
+为了加速对象分配。由于对象一般在堆上，而堆是共享的，需要同步。
+
+占用eden区空间，在TLAB启用情况下，虚拟机会为每一个线程分配一块TLAB空间。默认很小（2048）。
+
+-XX:+UserTLAB / -XX:PrintTLAB
+
+-XX:TLABSize=102400 指定大小
+
+-XX:-ResizeTLAB 大小会一直调整，可以禁止调整，一次性设置值。
+
+![](img-jvm/TLAB.jpg)
+
+### finalize()方法对垃圾回收的影响
+
+函数finalize是由FinalizerThread线程处理的。每一个即将回收并且包含finalize方法的对象都会在正式回收前加入FinalizerThread的执行队列。
+
+糟糕的Finalize方法（如耗时sleep 1秒），会导致对象来不及回收，导致OOM。
+
+**MAT** 工具可以查看 Finalizers 
 
 
 
