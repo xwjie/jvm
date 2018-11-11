@@ -20,6 +20,9 @@ public class TestStockDeep {
     }
 
     public static void main(String[] args) {
+        // Exception in thread "main" java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+        byte[] bs = new byte[Integer.MAX_VALUE-1];
+
         try {
             recursion(1,2,3,4);
         }
@@ -27,7 +30,6 @@ public class TestStockDeep {
             System.out.println(count);
             e.printStackTrace();
         }
-
     }
 
     // 复用槽位

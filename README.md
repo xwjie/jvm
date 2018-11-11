@@ -180,6 +180,205 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
     }
 ```
 
+### 异常处理表
+
+异常处理表是帧数据区重要的一部分
+
+```java
+    public static void main(String[] args) {
+        try {
+            recursion(1,2,3,4);
+        }
+        catch (Throwable e){
+            System.out.println(count);
+            e.printStackTrace();
+        }
+    }
+```
+
+**机器码如下**
+
+![异常处理表](img-jvm/exception-table-1.png)
+
+
+**异常表如下**
+
+![异常处理表](img-jvm/exception-table-2.png)
+
+
+## 栈上分配
+
+基础的基于 **逃逸分析** （判断对象的作用域是否可能逃逸出函数体）
+
+必须 **server模式** 。栈上分配并没有真正实现，是通过标量替换实现的。？
+
+| -server -XX:+DoEscapeAnalysis -XX:+EliminateAllocations
+
+
+
+**逃逸分析**
+* 同步消除
+* 标量替换
+
+通过-XX:+**EliminateAllocations** 可以开启标量替换， -XX:+**PrintEliminateAllocations** 查看标量替换情况。
+
+## 方法区
+
+1.8之前可以理解为 **永久区**（PerSize，MaxPerSize）。1.8之后使用 **元数据区** 取代。（MaxMetaspaceSize）。
+
+
+
+
+
+
+---
+---
+---
+
+
+# 常用java虚拟机参数
+
+## 参看参数
+
+-XX:+PrintFlagsInitial 打印所有参数
+
+-XX:+PrintFlagsFinal
+
+-XX:+PrintCommmandLineFlags 打印传递的参数
+
+-XX:+PrintVMOptions
+
+## GC信息
+
+PrintGC/PrintGCDetails
+
+PrintHeapAtGC(GC前后堆信息)
+
+-Xloggc:log/gc.log 日志存放
+
+
+
+## 类加载、卸载
+
+-verbose:class 跟踪类加载和卸载。等于 -XX:+TraceClassLoding 和  -XX:+TraceClassUnLoding
+
+> verbose - 
+adj.冗长的；啰嗦的；唠叨的。详细；罗嗦的；详细的
+
+## OOM类型
+
+* Java Heap 溢出（Java heap spacess）
+* 虚拟机栈和本地方法栈溢出（StackOverflowError）
+* 运行时常量池溢出（PermGen space）
+* 方法区溢出 （PermGen space）
+* 线程过多（unable to creat new native thread）
+* GC效率低下 (GC overhead limit exceeded)
+* 直接内存内存溢出 (Direct buffer memory)
+* 数组过大 （Requested array size exceeds VM limit）>=Integer.MAX_VALUE-1时
+
+## 非堆内存
+
+-XX:MaxDirectMemorySize，如果不配置，默认为最大堆空间（-Xmx）。直接内存使用达到时候会触发GC，可能导致OOM
+
+## 虚拟机工作模式
+
+Client / Server /
+
+
+
+
+
+---
+---
+---
+# GC算法
+
+## 引用计数器
+
+存在循环引用和性能问题。没有采用。
+
+## 标记清除法
+
+标记阶段：通过根节点，标记所有可到达对象
+
+**缺点** 回收后的空间是不连续的。
+
+## 复制算法（新生代）
+
+内存分2块，每次用一块。
+
+**新生代**：分为eden，from，to 3块。from和to称为survivor区，大小一样的2块。
+
+**老生代**
+
+这种算法适合 **新生代** 。
+
+## 标记压缩法（老生代）
+
+将所有存活对象压缩到内存一端，然后直接清除边界外的空间。
+
+## 分代算法
+
+新生代采用复制算法，老生代采用标记压缩法/标记清除算法。
+
+### 卡表（Card Table）
+
+卡表中每一个位表示年老代4K的空间，卡表记录未0的年老代区域没有任何对象指向新生代，只有卡表位为1的区域才有对象包含新生代引用，因此在新生代GC时，只需要扫描卡表位为1所在的年老代空间。使用这种方式，可以大大加快新生代的回收速度。
+
+![card table](img-jvm/card-table.png)
+
+卡表为1的时候，才扫描对应的老生代。
+
+新生代GC的时候，只需要扫描所有卡表为1所在的老生代空间。加快新生代GC时间。
+
+![card table](img-jvm/card-table-2.png)
+
+![card table](img-jvm/card-table-3.png)
+
+
+## 分区算法
+
+内存分为多个区处理。
+
+
+## 可触及性
+
+包含3种状态
+
+* 可触及的：根节点开始可到达。
+* 可复活的：对象所有引用被释放，但是对象可能在finalize函数中复活。
+* 不可触及的：finalize函数已经调用，而且没有复活。
+
+## 引用
+
+* 强引用
+* 软引用：可被回收。GC 不一定会回收，但内存紧张就会被回收，不会导致OOM。
+* 弱引用：发现就回收，不够空间够不够。
+* 虚引用：对象回收跟踪，必须和引用队列一起使用，作业在于跟踪垃圾回收过程。
+
+## STW（Stop-The-World）
+
+
+
+
+
+---
+---
+---
+# 垃圾收集器和内存分配
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
