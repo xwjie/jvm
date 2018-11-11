@@ -438,8 +438,51 @@ Thread Local Allocation Buffer，线程本地分配缓存。
 
 
 
+---
+---
+---
+# 性能监控工具
 
+## Linux下工具
 
+* top：显示系统整体资源使用情况
+* vmstat：监控内存和CPU
+  * vmstat 1 3   每秒一次，一共3次
+* iostat：监控IO使用
+  * iostat 1 3
+* pidstat：多功能诊断器（sysstat组件之一）
+  * 需要安装 sudo apt-get install sysstat   
+
+## windows下工具
+
+* perfmon windows自带的性能监控器
+* pslist 需要安装
+* JDK性能监控工具
+  * jps 
+    * jps -mlv 
+  * jstat 查看堆、GC情况
+  * jinfo 查看和修改jvm参数（只是某些jvm参数）
+  * jmap 生成堆，实例统计信息，classloader信息，Finalizer队列
+    *  jmap -histo  <pid>
+    *  jmap -dump:format=b,file=c:\heap.hprof <pid>
+  * jhat 堆分析，分析jmap的dump文件，自动开启http服务网页查看
+    * 支持OOL查询语句
+  * jstack 线程堆栈分析（线程状态，死锁等）
+  * jstatd 远程主机信息收集（RMI服务端程序）
+  * jcmd 基本上就是上面命令的合计
+    * jcmd 6356 列出可以执行的命令
+    * jcmd 6356 GC.run 执行gc
+    * jcmd 6356 GC.run
+    * jcmd 6356 GC.class_histogram
+  * hprof 性能统计工具
+  
+## jconsole 图形化工具
+
+## visual vm
+
+## bttrace
+
+不停机情况下插入字节码。可以在 **visual vm** 的 **插件** 里面使用。
 
 
 
