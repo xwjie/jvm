@@ -78,8 +78,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+            <state relative-caret-position="72">
+              <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#171#179#0" expanded="true" />
@@ -135,7 +135,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -220,7 +220,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Github/xwjie/jvm/src/cn/xiaowenjie/TestStockDeep.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541939964306" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541996415466" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -332,16 +332,15 @@
       <updated>1541914440273</updated>
       <workItem from="1541914443577" duration="1518000" />
       <workItem from="1541916862598" duration="111000" />
-      <workItem from="1541916991435" duration="8893000" />
+      <workItem from="1541916991435" duration="10195000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10522000" />
+    <option name="totallyTimeSpent" value="11824000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" sideWeight="0.50163937" side_tool="true" weight="0.25340393" />
@@ -444,8 +443,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        <state relative-caret-position="72">
+          <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#171#179#0" expanded="true" />

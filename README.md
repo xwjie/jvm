@@ -81,6 +81,8 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 
 ![](img-jvm/heap.jpg)
 
+![](img-jvm/jvmargs.jpg)
+
 ## 栈
 
 | -Xss128K 指定最大栈空间。
@@ -529,4 +531,52 @@ jdk6之前，属于永久区。jdk7后，移到了堆中。
 ---
 ---
 # 锁和并发
+
+## 对象头和锁
+
+![](img-jvm/mark-word.png)
+
+> biased - adj.偏向；偏重；有偏见的；倾向性的
+
+锁对象头上会记录获取锁的线程，和锁的姿态。
+
+![](img-jvm/lock.jpg)
+
+## 完整过程
+
+**锁的转换**
+
+![](img-jvm/lock-1.jpg)
+
+**重量级锁**
+
+![](img-jvm/lock-2.jpg)
+
+
+## 偏向锁
+
+jdk1.6
+
+> +XX:+UseBiasedLocking 启用偏向锁
+> +XX:BiasedLockingStartupDelay=0 虚拟机默认4秒后启动偏向锁，可以通过设置马上启动。
+
+锁被某个线程获取之后，进入了偏向锁模式。线程再次请求的时候，无需再次进行同步，节省时间。如果有其他线程请求锁，则退出偏向锁模式。
+
+> 竞争激励的场景，偏向锁反而会因为频繁切换影响性能，可以使用jvm参数关掉。
+
+## 轻量级锁
+
+如果偏向锁**失败**，虚拟机会让线程申请轻量级锁。虚拟机内部，使用 **BasicObjectLock** 的对象实现。这个对象有一个**BasicLock对象**和一个**持有该锁的Java对象指针**组成。BasicObjectLock对象放置在java栈的**栈帧**中。BaseLock对象内部还维护着 **displaced_header** 字段，用于备份对象头部的**Mark Word**。
+
+![](img-jvm/base-object-lock.png)
+
+## 锁膨胀
+
+如果轻量级锁失败，就会膨胀成重量级锁。
+
+## 自旋锁
+
+
+## 锁消除
+
 
