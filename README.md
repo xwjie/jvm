@@ -134,7 +134,7 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
     public static  void recursion2(int i1){
         {
             int i2 = i1;
-            System.out.println(i2); // 需要使用，否则优化掉了
+            System.out.println(i2);
         }
 
         int i3 = 1;
@@ -178,7 +178,7 @@ public static  void gc2(){
 
     int c = 1;
 
-    // a 虽然失效，但仍然在局部变量表，无法gc
+    // a 失效，槽位重用，a已经不存在，可以回收
     System.gc();
 }
 ```
@@ -220,6 +220,7 @@ public static void main(String[] args) {
 
 
 **逃逸分析**
+
 * 同步消除
 * 标量替换
 
@@ -454,8 +455,8 @@ Thread Local Allocation Buffer，线程本地分配缓存。
   * jstat 查看堆、GC情况
   * jinfo 查看和修改jvm参数（只是某些jvm参数）
   * jmap 生成堆，实例统计信息，classloader信息，Finalizer队列
-    *  jmap -histo  <pid>
-    *  jmap -dump:format=b,file=c:\heap.hprof <pid>
+    *  jmap -histo  \<pid>
+    *  jmap -dump:format=b,file=c:\heap.hprof \<pid>
   * jhat 堆分析，分析jmap的dump文件，自动开启http服务网页查看
     * 支持OOL查询语句
   * jstack 线程堆栈分析（线程状态，死锁等）

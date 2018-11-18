@@ -36,7 +36,7 @@ public class TestStockDeep {
     public static  void recursion2(int i1){
         {
             int i2 = i1;
-            System.out.println(i2); // 需要使用，否则优化掉了
+            System.out.println(i2);
         }
 
         int i3 = 1;

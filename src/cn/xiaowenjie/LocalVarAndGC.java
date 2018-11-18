@@ -27,7 +27,7 @@ public class LocalVarAndGC {
 
         int c = 1;
 
-        // a 虽然失效，但仍然在局部变量表，无法gc
+        //  a 失效，槽位重用，a已经不存在，可以回收
         System.gc();
     }
 

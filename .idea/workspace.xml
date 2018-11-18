@@ -16,37 +16,38 @@
     <session id="937526516">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="7" />
-          <entry key="java" value="11" />
+          <entry key="java" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="7" />
-          <entry key="JAVA" value="11" />
+          <entry key="JAVA" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="class" value="3" />
-          <entry key="java" value="2128" />
+          <entry key="java" value="2129" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="2128" />
+          <entry key="JAVA" value="2129" />
         </counts>
       </usages-collector>
     </session>
@@ -56,20 +57,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            <state relative-caret-position="48">
+              <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -77,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+            <state relative-caret-position="648">
+              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -86,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-23">
-              <caret line="1280" column="5" lean-forward="true" selection-start-line="1280" selection-start-column="5" selection-end-line="1280" selection-end-column="5" />
+            <state relative-caret-position="28776">
+              <caret line="1280" column="5" selection-start-line="1280" selection-start-column="5" selection-end-line="1280" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -95,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+            <state relative-caret-position="192">
+              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -104,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/Thread.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
@@ -116,11 +114,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/HelloLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="72">
               <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
               <folding>
                 <element signature="e#86#87#0" expanded="true" />
-                <element signature="e#104#105#0" expanded="true" />
+                <element signature="e#148#149#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/util/concurrent/LinkedBlockingQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
+            <state relative-caret-position="2640">
               <caret line="154" selection-start-line="154" selection-end-line="164" selection-end-column="61" />
             </state>
           </provider>
@@ -139,20 +137,16 @@
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/ClassStuct.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#380#381#0" expanded="true" />
-                <element signature="e#404#405#0" expanded="true" />
-              </folding>
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="408">
+              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -182,13 +176,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java" />
-        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java" />
-        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/ClassStuct.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/classloader/HelloLoader.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java" />
+        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java" />
+        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java" />
       </list>
     </option>
   </component>
@@ -215,6 +209,29 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
+              <item name="jvm" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
+              <item name="jvm" type="616d4139:PackageViewModuleNode" />
+              <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
+              <item name="jvm" type="616d4139:PackageViewModuleNode" />
+              <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
+              <item name="classloader" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -261,29 +278,6 @@
               <item name="jvm" type="b2602c69:ProjectViewProjectNode" />
               <item name="jvm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
-              <item name="jvm" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
-              <item name="jvm" type="616d4139:PackageViewModuleNode" />
-              <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
-              <item name="jvm" type="616d4139:PackageViewModuleNode" />
-              <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
-              <item name="classloader" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -414,16 +408,17 @@
       <workItem from="1542082550016" duration="2730000" />
       <workItem from="1542425143397" duration="2537000" />
       <workItem from="1542545493136" duration="9825000" />
+      <workItem from="1542563290011" duration="78000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26916000" />
+    <option name="totallyTimeSpent" value="26994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" weight="0.15204236" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.15204236" />
       <window_info id="Structure" order="1" sideWeight="0.50163937" side_tool="true" weight="0.25340393" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -481,24 +476,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="16" column="90" selection-start-line="16" selection-start-column="80" selection-end-line="16" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -512,16 +493,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java">
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="648">
+          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28776">
+          <caret line="1280" column="5" selection-start-line="1280" selection-start-column="5" selection-end-line="1280" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/HelloLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+          <folding>
+            <element signature="e#86#87#0" expanded="true" />
+            <element signature="e#148#149#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/util/concurrent/LinkedBlockingQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
+        <state relative-caret-position="2640">
           <caret line="154" selection-start-line="154" selection-end-line="164" selection-end-column="61" />
         </state>
       </provider>
@@ -529,46 +538,7 @@
     <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/ClassStuct.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="1280" column="5" lean-forward="true" selection-start-line="1280" selection-start-column="5" selection-end-line="1280" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/HelloLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-          <folding>
-            <element signature="e#86#87#0" expanded="true" />
-            <element signature="e#104#105#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
@@ -576,6 +546,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="1518" column="37" selection-start-line="1518" selection-start-column="16" selection-end-line="1518" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
         </state>
       </provider>
     </entry>
