@@ -8,7 +8,7 @@
 
 什么样的单词是对的。
 
-|整数可以有下划线
+>整数可以有下划线
 
 ## 语法
 
@@ -37,8 +37,9 @@ float和double为满足IEEE754的32位浮点数和64位浮点数。
 IEEE754规范，一个浮点数由符号位，指数位和尾数位3部分组成。
 32位的float类型，符号位1位，指数位8位，尾数位为23位。
 
-| s eeeeeeee m(23个）
-| 当e全部为0的时候，m前面加0，否则加1
+> s eeeeeeee m(23个）
+
+> 当e全部为0的时候，m前面加0，否则加1
 
 
 浮点数取值为 s * m * 2的（e-127）次方
@@ -55,18 +56,18 @@ IEEE754规范，一个浮点数由符号位，指数位和尾数位3部分组成
 ```
 
 ```java
-        float f = -5;
+float f = -5;
 
-        // float的内部表示
-        System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(f)));
+// float的内部表示
+System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(f)));
 //1  10000001(指数位8位)  01000000000000000000000（23位）
-	
 
-        double d = -5;
+
+double d = -5;
 
 //1 10000000001（指数位11位） 0100000000000000000000000000000000000000000000000000（52位）
-        // double 的内部表示
-        System.out.println(Long.toBinaryString(Double.doubleToRawLongBits(d)));
+// double 的内部表示
+System.out.println(Long.toBinaryString(Double.doubleToRawLongBits(d)));
 ```
 
 # 基本结构
@@ -85,7 +86,7 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 
 ## 栈
 
-| -Xss128K 指定最大栈空间。
+> -Xss128K 指定最大栈空间。
 
 线程私有的内存空间。
 
@@ -145,41 +146,41 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 **占2word的槽位的复用**
 
 ```java
-    // 局部变量表是4 word
-    public static  void recursion3(double d1){
-        {
-            double d2 = d1; // 2 word
-            System.out.println(d2);
-        }
-
-        int i3 = 1; // 1 word 复用 d2的第一个1槽位
-        int i4 = 2; // 1 word 复用 d2的第二个操作
+// 局部变量表是4 word
+public static  void recursion3(double d1){
+    {
+        double d2 = d1; // 2 word
+        System.out.println(d2);
     }
+
+    int i3 = 1; // 1 word 复用 d2的第一个1槽位
+    int i4 = 2; // 1 word 复用 d2的第二个操作
+}
 
 ```
 
 **槽位和gc**
 
 ```java
-    public static  void gc(){
-        {
-            byte[] a = new byte[6*1024*1024];
-        }
-
-        // a 虽然失效，但仍然在局部变量表，无法gc
-        System.gc();
+public static  void gc(){
+    {
+        byte[] a = new byte[6*1024*1024];
     }
 
-    public static  void gc2(){
-        {
-            byte[] a = new byte[6*1024*1024];
-        }
+    // a 虽然失效，但仍然在局部变量表，无法gc
+    System.gc();
+}
 
-        int c = 1;
-
-        // a 虽然失效，但仍然在局部变量表，无法gc
-        System.gc();
+public static  void gc2(){
+    {
+        byte[] a = new byte[6*1024*1024];
     }
+
+    int c = 1;
+
+    // a 虽然失效，但仍然在局部变量表，无法gc
+    System.gc();
+}
 ```
 
 ### 异常处理表
@@ -187,15 +188,15 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 异常处理表是帧数据区重要的一部分
 
 ```java
-    public static void main(String[] args) {
-        try {
-            recursion(1,2,3,4);
-        }
-        catch (Throwable e){
-            System.out.println(count);
-            e.printStackTrace();
-        }
+public static void main(String[] args) {
+    try {
+        recursion(1,2,3,4);
     }
+    catch (Throwable e){
+        System.out.println(count);
+        e.printStackTrace();
+    }
+}
 ```
 
 **机器码如下**
@@ -214,7 +215,7 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 
 必须 **server模式** 。栈上分配并没有真正实现，是通过标量替换实现的。？
 
-| -server -XX:+DoEscapeAnalysis -XX:+EliminateAllocations
+> -server -XX:+DoEscapeAnalysis -XX:+EliminateAllocations
 
 
 
@@ -240,7 +241,7 @@ PC：如果是不是本地方法，PC指向正在执行的指令，如果是本�
 
 # 常用java虚拟机参数
 
-## 参看参数
+## 查看参数
 
 -XX:+PrintFlagsInitial 打印所有参数
 
@@ -264,8 +265,7 @@ PrintHeapAtGC(GC前后堆信息)
 
 -verbose:class 跟踪类加载和卸载。等于 -XX:+TraceClassLoding 和  -XX:+TraceClassUnLoding
 
-> verbose - 
-adj.冗长的；啰嗦的；唠叨的。详细；罗嗦的；详细的
+> verbose adj.冗长的；啰嗦的；唠叨的。详细；罗嗦的；详细的
 
 
 ## 非堆内存
@@ -275,7 +275,6 @@ adj.冗长的；啰嗦的；唠叨的。详细；罗嗦的；详细的
 ## 虚拟机工作模式
 
 Client / Server /
-
 
 
 
