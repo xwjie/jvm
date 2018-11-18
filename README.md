@@ -844,7 +844,7 @@ protected final Class<?> findLoadedClass(String name) {
 * Extension ClassLoader 扩展类加载器
 * App ClassLoader 应用类加载器（也叫系统类加载器 System ClassLoader）
 
-![](img-jvm/classloader-main-2.png)
+![](img-jvm/classloader-main-2.gif)
 
 层次结构：
 
@@ -854,6 +854,8 @@ protected final Class<?> findLoadedClass(String name) {
 BootStrap ClassLoader 无法获取到实例，是系统级纯C实现的。所以ExtClassLoader的getParent为null。
 
 ### 双亲委托模式
+
+**往上查找，往下加载**
 
 ![](img-jvm/classloader-double-parent.png)
 
@@ -895,11 +897,40 @@ public class FindClassLoader {
 
 **原因**：检查类是否加载的委托过程是单向的，顶层ClassLoader无法访问底层的ClassLoader。应用类访问系统类没有问题，但系统类访问应用类有问题。如接口定义和工厂方法在系统类里面，实现类在应用类里面，导致系统类ClassLoader加载的工厂方法无法创建由应用类加载器加载的接口实例。拥有这种问题的组件有很多，如 JDBC，Xml Parser等。
 
+
+
 ### 双亲委托模式的补充 
 
 SPI：Service Provider Interface
 
+**线程上下文类加载器**
 
+Thread类中有两个方法
+```java
+public ClassLoader getContextClassLoader()//获取线程中的上下文加载器
+public void setContextClassLoader(ClassLoader cl)//设置线程中的上下文加载器
+```
+
+通过这两个方法，可以把一个ClassLoader置于一个线程的实例之中，使该ClassLoader成为一个相对共享的实例。这样即使是启动类加载器中的代码也可以通过这种方式访问应用类加载器中的类了
+
+![](img-jvm/classloader-spi.png)
+
+
+[dubbo源码解析-spi(一)](https://www.saowen.com/a/a15dc94434a957289c16d08b0e551c68b27ad5f2926b29d9e2660faf06c148f7)
+
+[类加载器&线程上下文加载器](https://blog.csdn.net/anhuidelinger/article/details/53241967)
+
+
+
+### 突破双亲委托模式
+
+自定义ClassLoader，重载loadClass改变默认的双亲委托模式，先自己加载，加载不到在往上。
+
+### 热替换
+
+> 不同的ClassLoader加载的同名类是不同类型，无法互相转换和兼容。
+
+热加载就是重新加载，成为一个新的class对象。
 
 
 
