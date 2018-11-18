@@ -783,15 +783,125 @@ lambda表达式的实现
 
 ### 解析类
 
-将类、接口、字段和方法的符号引用转换为直接引用。
+将类、接口、字段和方法的**符号引用**转换为**直接引用**。
 
 符号引用：就是一些字面量的引用，和虚拟机的内部数据结构和内存布局无关。class类文件中，通过**常量池**进行了大量的符号引用。
 
+![](img-jvm/class-prase.png)
+
+> string的intern方法，intern是 **拘留** 的意思。
+> 
+> intern :  1. 实习生 2. 拘留
+
+
 ### 初始化
+
+执行java字节码，重要工作就是执行类的初始化方法 **\<clinit\>** (class init)，该方法由编译器自动生成，由类的 **静态成员的赋值语句** 以及 **static语句块** 合并产生的。
+
+![](img-jvm/class-init.png)
+
+
+**不一定会有clinit方法**，如果只有静态的常量，就不会有。如果是变量，会有。
+
+clinit 方法是**带锁线程安全**的（但方法上并没有synchronize关键字），多线程初始化的时候，可能引起**死锁**！
 
 ### 使用
 
 ### 卸载
+
+## ClassLoader
+
+ClassLoader负责类的加载（通过各种方式将class的二进制数据流读入系统），然后交给java虚拟机进行连接、初始化等操作，只能影响类的加载，无法改变类的连接和初始化行为。
+
+### 4个重要方法
+
+```java
+
+public Class<?> loadClass(String name) throws ClassNotFoundException {
+    return loadClass(name, false);
+}
+
+@Deprecated(since="1.1")
+protected final Class<?> defineClass(byte[] b, int off, int len)
+    throws ClassFormatError
+
+
+protected Class<?> findClass(String name) throws ClassNotFoundException {
+    throw new ClassNotFoundException(name);
+}
+
+protected final Class<?> findLoadedClass(String name) {
+    if (!checkName(name))
+        return null;
+    return findLoadedClass0(name);
+}
+```
+
+### ClassLoader的分类
+
+虚拟机创建了3类
+* BootStrap ClassLoader 启动类加载器
+* Extension ClassLoader 扩展类加载器
+* App ClassLoader 应用类加载器（也叫系统类加载器 System ClassLoader）
+
+![](img-jvm/classloader-main-2.png)
+
+层次结构：
+
+![](img-jvm/classloader-main.jpg)
+
+
+BootStrap ClassLoader 无法获取到实例，是系统级纯C实现的。所以ExtClassLoader的getParent为null。
+
+### 双亲委托模式
+
+![](img-jvm/classloader-double-parent.png)
+
+>-Xbootclasspath可以把指定目录加到启动的classpath中。那么这里的类就会由启动类加载器加载。但是，如果这个类没有使用过，bootstrap ClassLoader不会主动加载，你可以在自定义的ClassLoader加载（）。
+
+```java
+/**
+ *  使用-Xbootclasspath可以把包含 另外一份HelloLoader.class 的目录加到启动的classpath中。
+ *  理论上应该由bootstrap ClassLoader加载。
+ *  但我们可以先在自己的app loader里面加载他。（必须在使用他之前）
+ */
+public class FindClassLoader {
+
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        ClassLoader loader = FindClassLoader.class.getClassLoader();
+
+        byte[] bytes = loadClassBytes("cn.xiaowenjie.classloader.HelloLoader");
+
+        Method defineClass = ClassLoader.class.getDeclaredMethod("defineClass", byte[].class, int.class, int.class);
+
+        defineClass.setAccessible(true);
+        defineClass.invoke(loader, bytes, 0, bytes.length);
+        defineClass.setAccessible(false);
+
+        HelloLoader helloLoader = new HelloLoader();
+        System.out.println(helloLoader.getClass().getClassLoader());
+        helloLoader.print();
+    }
+
+    private static byte[] loadClassBytes(String s) {
+    }
+}
+```
+
+> 判断类是否加载时候，应用类加载器会顺着双亲路径往上判断，直到启动类加载器。但是启动类加载器不会往下询问，这个委托路线是**单向**的。
+
+
+### 双亲委托模式弊端
+
+**原因**：检查类是否加载的委托过程是单向的，顶层ClassLoader无法访问底层的ClassLoader。应用类访问系统类没有问题，但系统类访问应用类有问题。如接口定义和工厂方法在系统类里面，实现类在应用类里面，导致系统类ClassLoader加载的工厂方法无法创建由应用类加载器加载的接口实例。拥有这种问题的组件有很多，如 JDBC，Xml Parser等。
+
+### 双亲委托模式的补充 
+
+SPI：Service Provider Interface
+
+
+
+
 
 
 

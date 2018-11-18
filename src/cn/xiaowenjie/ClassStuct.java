@@ -2,6 +2,18 @@ package cn.xiaowenjie;
 
 public class ClassStuct {
     public static int varStatic = 999;
+
+    public static int varStatic2;
+
+    static {
+        varStatic2 = 1111;
+    }
+
+
+
+
+
+
     public int varLocal = 888;
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +30,7 @@ public class ClassStuct {
     }
 
 
-    public int methodLocal(boolean flag, byte b) throws Exception{
+    public synchronized int  methodLocal(boolean flag, byte b) throws Exception{
         System.out.println(b);
         try {
             return 1;
