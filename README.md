@@ -579,4 +579,166 @@ jdk1.6
 
 ## 锁消除
 
+不存在逸出的地方，编译的时候会自动去掉锁。
+
+> -XX:+DoEscapeAnalysis -XX:+EliminateLocks
+
+## 锁优化
+
+* 减少锁持有时间
+* 锁粗化 （大量切换请求还不如粗化）
+* 减小锁粒度
+* 锁分离
+  * **LinkedBlockingQueue** ， 有 putLock 和 takeLock 2把 ReentrantLock 锁。
+
+LinkedBlockingQueue 代码片段：
+
+```java
+    /** Lock held by take, poll, etc */
+    private final ReentrantLock takeLock = new ReentrantLock();
+
+    /** Wait queue for waiting takes */
+    private final Condition notEmpty = takeLock.newCondition();
+
+    /** Lock held by put, offer, etc */
+    private final ReentrantLock putLock = new ReentrantLock();
+
+    /** Wait queue for waiting puts */
+    private final Condition notFull = putLock.newCondition();
+```
+
+## 无锁
+
+### CAS （Compare And Swap）
+
+### LongAdder（jdk8）
+
+实质是想通过多个原子锁，来替代单一锁，减少多线程对单一锁的竞争，提高并发写的能力。distributed-cache-line-counter-scalable、LongAddr、ConcurrentHashMap都是这种思想。 
+
+LongAdder适合的场景是 **统计求和计数的场景**，而且LongAdder基本只提供了add方法，而AtomicLong还具有cas方法。
+
+## 将随机变为可控：理解java内存模型
+
+### 原子性
+
+64位的long类型读写并非原子操作。需要定义为 **volatie** 即可解决。
+
+## 有序性
+
+三种地方可能会导致指令重排：
+
+* 编译器优化的重排序
+* 指令级并行的重排序（指令级并行技术（Instruction-Level
+Parallelism， ILP）来将多条指令重叠执行）
+* 内存系统的重排序（处理器使用缓存和读/写缓冲区）
+
+关键字：
+
+* as-if-serial语义： 不管怎么重排序（编译器和处理器为了提高并行度），
+（单线程）程序的执行结果不能被改变
+* happens- before程序顺序规则
+
+
+## 可见性
+
+---
+---
+---
+# Class 文件结构
+
+
+![Class 文件结构](img-jvm/class.png)
+
+
+Class文件格式
+
+Class文件格式ClassFile结构体的C语言描述如下：
+
+```C
+struct ClassFile
+{
+    u4 magic;                    // 识别Class文件格式，具体值为0xCAFEBABE，
+    u2 minor_version;            // Class文件格式副版本号，
+    u2 major_version;            // Class文件格式主版本号，
+    u2 constant_pool_count;      // 常数表项个数，
+    cp_info **constant_pool;     // 常数表，又称变长符号表，
+    u2 access_flags;             // Class的声明中使用的修饰符掩码，
+    u2 this_class;               // 常数表索引，索引内保存类名或接口名，
+    u2 super_class;              // 常数表索引，索引内保存父类名，
+    u2 interfaces_count;         // 超接口个数，
+    u2 *interfaces;              // 常数表索引，各超接口名称，
+    u2 fields_count;             // 类的域个数，
+    field_info **fields;         // 域数据，包括属性名称索引，域修饰符掩码等，
+    u2 methods_count;            // 方法个数，
+    method_info **methods;       // 方法数据，包括方法名称索引，方法修饰符掩码等，
+    u2 attributes_count;         // 类附加属性个数，
+    attribute_info **attributes; // 类附加属性数据，包括源文件名等。
+};
+```
+ 
+
+其中 u2 为 unsigned short，u4 为 unsigned long：
+
+```c
+typedef unsigned char   u1;
+typedef unsigned short  u2;
+typedef unsigned long   u4;
+```
+ 
+
+cp_info **constant_pool 是常量表的指针数组，指针数组个数为 constant_pool_count，结构体cp_info为
+
+>注意：各种常量结构不同
+
+```c
+// 类
+struct constant_class_info
+{
+    u1 tag;            // 常数表数据类型
+    u2 name_index;     // 常数池中索引
+};
+
+// utf8字符串
+struct constant_utf8_info
+{
+    u1 tag;            // 常数表数据类型
+    u2 length;         // 长度
+    u1 bytes[length];  // 数据
+};
+```
+
+
+## 重点看看方法结构
+
+![](img-jvm/class-method.png)
+
+### line-number-table
+
+![](img-jvm/class-line-table.png)
+
+### exception-table
+
+![](img-jvm/class-exception-table.png)
+
+
+## 强大的动态调用 - BootstrapMethods属性
+
+lambda表达式的实现
+
+
+---
+---
+---
+
+
+
+
+
+
+
+
+
+
+
+
 
