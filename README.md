@@ -346,7 +346,7 @@ Client / Server /
 * 强引用
 * 软引用：可被回收。GC 不一定会回收，但内存紧张就会被回收，不会导致OOM。
 * 弱引用：发现就回收，不够空间够不够。
-* 虚引用：对象回收跟踪，必须和引用队列一起使用，作业在于跟踪垃圾回收过程。
+* 虚引用：对象回收跟踪，必须和引用队列一起使用，作用在于跟踪垃圾回收过程。
 
 ## STW（Stop-The-World）
 
@@ -859,7 +859,7 @@ BootStrap ClassLoader 无法获取到实例，是系统级纯C实现的。所以
 
 ![](img-jvm/classloader-double-parent.png)
 
->-Xbootclasspath可以把指定目录加到启动的classpath中。那么这里的类就会由启动类加载器加载。但是，如果这个类没有使用过，bootstrap ClassLoader不会主动加载，你可以在自定义的ClassLoader加载（）。
+>-Xbootclasspath可以把指定目录加到启动的classpath中。那么这里的类就会由启动类加载器加载。但是，如果这个类没有使用过，bootstrap ClassLoader不会主动加载，你可以在自定义的ClassLoader加载。
 
 ```java
 /**
@@ -895,7 +895,7 @@ public class FindClassLoader {
 
 ### 双亲委托模式弊端
 
-**原因**：检查类是否加载的委托过程是单向的，顶层ClassLoader无法访问底层的ClassLoader。应用类访问系统类没有问题，但系统类访问应用类有问题。如接口定义和工厂方法在系统类里面，实现类在应用类里面，导致系统类ClassLoader加载的工厂方法无法创建由应用类加载器加载的接口实例。拥有这种问题的组件有很多，如 JDBC，Xml Parser等。
+**原因**：检查类是否加载的委托过程是单向的，顶层ClassLoader**无法访问**底层的ClassLoader。应用类访问系统类没有问题，但系统类访问应用类有问题。如接口定义和工厂方法在系统类里面，实现类在应用类里面，导致系统类ClassLoader加载的工厂方法无法创建由应用类加载器加载的接口实例。拥有这种问题的组件有很多，如 JDBC，Xml Parser等。
 
 
 
@@ -937,10 +937,242 @@ public void setContextClassLoader(ClassLoader cl)//设置线程中的上下文�
 
 
 
+---
+
+# 字节码执行
+
+
+
+## Class字节码指令解释执行
 
 
 
 
+```java
+package cn.xiaowenjie.bytecode;
+
+public class Calc {
+
+    public int calc(){
+        int a = 100;
+        int b = 200;
+        int c = 300;
+        return (a+b)/c;
+    }
+}
+```
+
+**javap**
+```
+用法: javap <options> <classes>
+其中, 可能的选项包括:
+  -help  --help  -?        输出此用法消息
+  -version                 版本信息
+  -v  -verbose             输出附加信息
+  -l                       输出行号和本地变量表
+  -public                  仅显示公共类和成员
+  -protected               显示受保护的/公共类和成员
+  -package                 显示程序包/受保护的/公共类
+                           和成员 (默认)
+  -p  -private             显示所有类和成员
+  -c                       对代码进行反汇编
+  -s                       输出内部类型签名
+  -sysinfo                 显示正在处理的类的
+                           系统信息 (路径, 大小, 日期, MD5 散列)
+  -constants               显示最终常量
+  -classpath <path>        指定查找用户类文件的位置
+  -cp <path>               指定查找用户类文件的位置
+  -bootclasspath <path>    覆盖引导类文件的位置
+```
+
+使用 `javap -v Calc.class` 查看：
+
+```
+Classfile /D:/Github/xwjie/jvm/out/production/jvm/cn/xiaowenjie/bytecode/Calc.class
+  Last modified 2018-11-23; size 427 bytes
+  MD5 checksum 0edbd9bff1080c2535e9042539433146
+  Compiled from "Calc.java"
+public class cn.xiaowenjie.bytecode.Calc
+  minor version: 0
+  major version: 55
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #3.#19         // java/lang/Object."<init>":()V
+   #2 = Class              #20            // cn/xiaowenjie/bytecode/Calc
+   #3 = Class              #21            // java/lang/Object
+   #4 = Utf8               <init>
+   #5 = Utf8               ()V
+   #6 = Utf8               Code
+   #7 = Utf8               LineNumberTable
+   #8 = Utf8               LocalVariableTable
+   #9 = Utf8               this
+  #10 = Utf8               Lcn/xiaowenjie/bytecode/Calc;
+  #11 = Utf8               calc
+  #12 = Utf8               ()I
+  #13 = Utf8               a
+  #14 = Utf8               I
+  #15 = Utf8               b
+  #16 = Utf8               c
+  #17 = Utf8               SourceFile
+  #18 = Utf8               Calc.java
+  #19 = NameAndType        #4:#5          // "<init>":()V
+  #20 = Utf8               cn/xiaowenjie/bytecode/Calc
+  #21 = Utf8               java/lang/Object
+{
+  public cn.xiaowenjie.bytecode.Calc();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 3: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcn/xiaowenjie/bytecode/Calc;
+
+  public int calc();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: bipush        100
+         2: istore_1
+         3: sipush        200
+         6: istore_2
+         7: sipush        300
+        10: istore_3
+        11: iload_1
+        12: iload_2
+        13: iadd
+        14: iload_3
+        15: idiv
+        16: ireturn
+      LineNumberTable:
+        line 6: 0
+        line 7: 3
+        line 8: 7
+        line 9: 11
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      17     0  this   Lcn/xiaowenjie/bytecode/Calc;
+            3      14     1     a   I
+            7      10     2     b   I
+           11       6     3     c   I
+}
+SourceFile: "Calc.java"
+```
+
+21个常量池
+
+2个方法，第一个为自动生成的构造函数，自动生成的。第二个为我们编写的函数。方法体内，显示了栈大小，局部变量表大小，字节码指令，行号，局部变量表等信息。
+
+>stack=2, locals=4, args_size=1
+
+字节码前面的数字表示字节码偏移量。
+
+>   0: bipush        100
+
+bipush 指令1个字节，接受一个1字节的参数，所以一共2字节，下面的指令从2位置开始。bipush能处理-128-127的数，第二变量b是200，所以需要用sipush指令，他支持-32768-3276，sipush 指令1个字节，接受一个双字节的参数，所以一共三字节、
+
+第一条指令执行完， 操作数栈里面是100。
+
+![](./img-jvm/codebyte-1.webp)
+
+>   2: istore_1
+
+操作数栈弹出一个元素，存放到局部变量表index为1的位置。（0是this，非静态方法的时候）
+
+> 11: iload_1 \
+> 12: iload_2 \
+> 13: iadd
+
+iload_1： 把局部变量index为1的元素压入操作数栈。
+
+iload_2 执行完之后如下：（栈是先入的数在下面。）
+
+![](./img-jvm/codebyte-2.webp)
+
+iadd：加法，操作数栈弹出2个数，然后做加法，结果在压回操作数栈。
+
+![](./img-jvm/codebyte-3.webp)
+
+>  16: ireturn
+
+ireturn： 将当前函数操作数栈的顶层元素弹出，并将这个元素压入调用函数的操作数栈。操作数栈的其他元素会被丢弃。
+
+详细看下面的贴 [Class字节码指令解释执行](https://www.jianshu.com/p/ab29c1cfdd81)
 
 
+## 常用指令
+
+i表示整数，l表示长整数，f表示浮点数，d表示双精度浮点数，a表示对象引用。
+
+### 常量入栈指令
+
+* const系列
+    * iconst_m1: -1压入操作数栈
+    * iconst_x(x为0-5)
+    * lconst_x 压long
+    * dconst_x 压double
+    * fconst_x 压f
+* push系列
+    * 
+* ldc指令
+    * 超过16位的。值会放到常量池，然后把常量池引用index传给ldc
+
+测试代码：
+
+```java
+public void test(){
+    // const 指令 => iconst_1
+    int a = 1;
+
+    // bipush  = > bipush        127
+    int b = 127;
+
+    // sipush => sipush        128
+    int c = 128;
+
+    // ldc 指令, 33333 会作为参数
+    // => ldc           #2                  // int 33333
+    int a2 = 33333;
+
+    float f = 0f;
+    double d = 0d;
+    long l  = 1L;
+}
+```
+
+字节码：
+
+```
+ 0: iconst_1
+ 1: istore_1
+ 2: bipush        127
+ 4: istore_2
+ 5: sipush        128
+ 8: istore_3
+ 9: ldc           #2                  // int 33333
+11: istore        4
+13: fconst_0
+14: fstore        5
+16: dconst_0
+17: dstore        6
+19: lconst_1
+20: lstore        8
+22: return
+```
+
+常量池：
+
+```
+Constant pool:
+   #1 = Methodref          #4.#26         // java/lang/Object."<init>":()V
+   #2 = Integer            33333
+   #3 = Class              #27            // cn/xiaowenjie/bytecode/ConstDemo
+   #4 = Class              #28            // java/lang/Object
+```
 
