@@ -1257,3 +1257,78 @@ monitorenter/monitorexit 执行时，都需要在操作数栈顶压入对象，�
 
 synchronize加在**方法**上的时候，看不到对应的字节码，而是在方法修饰符上看到，虚拟机会自动加指令。
 
+## ASM框架
+
+## java agent
+
+2个方法。 
+
+```java
+public static void premain(String agentArgs, Instrumentation inst){
+    inst.addTransformer(new ClassFileTransformer(){
+        @Override
+        public byte[] transform(  ClassLoader         loader,
+                String              className,
+                Class<?>            classBeingRedefined,
+                ProtectionDomain    protectionDomain,
+                byte[]              classfileBuffer)
+        throws IllegalClassFormatException {
+        return null;
+    }
+    });
+}
+
+
+public static void agentmain(String agentArgs, Instrumentation inst){
+
+}
+```
+
+
+## 静态编译优化
+
+优化分为2种：
+
+* 编译时优化（静态）
+    * 常量计算
+        * 数字计算
+        * 字符串拼接
+    * 变量字符串使用StringBuilder代替
+    * 基于常量条件语句裁剪
+        * if（FLAG）
+    * swith语句
+        * swith 1，2，5 生成 tableswitch语句，自动填充3，4
+* jit（just-in-time）即时编译（运行时）
+    * 虚拟机3中执行方式，
+        * 解释执行（不做jit编译）
+            * java -Xint -version 开启
+        * 混合模式（默认）
+            * 超过阈值进行jit，-XX:CompileThreshold
+        * 编译执行（不管是否热点代码，都会编译执行）
+            * java -Xcomp -version 开启
+    * -Xint
+
+### 多级编译器
+
+虚拟机有2中编译系统：
+
+* 客户端编译器（C1）
+    * -client 参数
+* 服务端编译器（C2）
+    * -server 参数
+
+为了在C1和C2中平衡，分为0-4 5级。越高性能越好。使用 `-XX:+TieredCompilation -server -Xcomp` 参数
+
+### OSR 栈上替换
+
+### 方法内嵌
+
+> -XX:+InLine 开启内嵌\  
+> -XX:FreqInLineSize 多小的函数可以内嵌
+
+### 设置代码缓存大小
+
+---
+End
+
+
