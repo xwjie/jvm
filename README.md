@@ -1119,9 +1119,10 @@ i表示整数，l表示长整数，f表示浮点数，d表示双精度浮点数�
     * dconst_x 压double
     * fconst_x 压f
 * push系列
-    * 
+    * bipush
+    * sipush
 * ldc指令
-    * 超过16位的。值会放到常量池，然后把常量池引用index传给ldc
+    * 超过16位的，值会放到常量池，然后把常量池引用index传给ldc
 
 测试代码：
 
@@ -1130,14 +1131,14 @@ public void test(){
     // const 指令 => iconst_1
     int a = 1;
 
-    // bipush  = > bipush        127
+    // bipush  = > bipush 127
     int b = 127;
 
-    // sipush => sipush        128
+    // sipush => sipush 128
     int c = 128;
 
-    // ldc 指令, 33333 会作为参数
-    // => ldc           #2                  // int 33333
+    // ldc 指令, 33333 会作为常量，常量的index会作为参数
+    // => ldc  #2 // int 33333
     int a2 = 33333;
 
     float f = 0f;
@@ -1175,4 +1176,84 @@ Constant pool:
    #3 = Class              #27            // cn/xiaowenjie/bytecode/ConstDemo
    #4 = Class              #28            // java/lang/Object
 ```
+
+### 局部变量压栈指令
+
+* (x)load
+* (x)load_n
+* (x)aload
+
+### 出栈装入局部变量表指令
+
+store
+
+### 通用型操作
+
+* nop 空指令
+* dup 复制栈顶元素（new之后常带）
+
+### 类型转换指令
+
+(x)2(y)
+
+### 运算指令
+
+### 对象/数组操作指令
+
+* 创建指令
+    * new
+    * newarray
+    * anewarray
+    * multianewarray
+* 字段访问指令
+    * getfiled
+    * putfield
+    * getstatic
+    * putstatic
+* 类型检查指令
+    * instanceof
+    * chechcast 就是强转
+* 数组操作指令
+    * xastore
+    * xaload
+
+### 比较控制指令
+
+* 比较指令
+    * （x）cmp（y）
+* 条件跳转指令
+    * if（xx） 把栈顶元素弹出，测试是否满足条件，如果满足跳转给定位置
+* 比较条件跳转指令
+    * if_(i)cmp(xx)
+* 多条件分支跳转（针对switch-case）
+    * tableswitch（条件是连续的）
+    * lookupswith（条件不连续）,jdk7的swith字符串，就是lookupswith hashcode 实现的。
+* 无条件跳转
+    * goto 
+
+### 函数调用和返回
+
+* 函数调用
+    * invokevir
+    * invokeinterface
+    * invokespecial 
+        * 特殊函数，如init函数
+        * 私有函数（没有动态，所以可以静态绑定）
+        * 父类方法
+    * invokestatic
+    * invokedynamic
+    * 
+* 返回指令
+    * （x）return
+    * void的时候就是return
+
+### 同步控制
+
+* monitorenter/monitorexit
+
+使用monitorenter指令请求进入，如果当前对象的监视器计数器为0，准许进入，若为1，判断是否当前线程，是则进入，否则进行等待。
+
+monitorenter/monitorexit 执行时，都需要在操作数栈顶压入对象，之后，monitorenter和monitorexit的锁定和释放都是针对这个对象的监视器进行的。
+
+synchronize加在**方法**上的时候，看不到对应的字节码，而是在方法修饰符上看到，虚拟机会自动加指令。
 
