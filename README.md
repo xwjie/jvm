@@ -34,11 +34,10 @@ float和double为满足IEEE754的32位浮点数和64位浮点数。
 
 ### 浮点数的表示
 
-IEEE754规范，一个浮点数由符号位，指数位和尾数位3部分组成。
+**IEEE754**规范，一个浮点数由符号位，指数位和尾数位3部分组成。
 32位的float类型，符号位1位，指数位8位，尾数位为23位。
 
-> s eeeeeeee m(23个）
-
+> s eeeeeeee m(23个）\
 > 当e全部为0的时候，m前面加0，否则加1
 
 
@@ -68,6 +67,27 @@ double d = -5;
 //1 10000000001（指数位11位） 0100000000000000000000000000000000000000000000000000（52位）
 // double 的内部表示
 System.out.println(Long.toBinaryString(Double.doubleToRawLongBits(d)));
+```
+
+[浮点数的大小比较为什么不能用等号？](https://www.cnblogs.com/xiehongfeng100/p/4851201.html)
+
+```java
+{
+    float f1 = 0.1f;
+    float f2 = 0.1f;
+
+    System.out.println(f1 == f2); // true
+    System.out.println(15.1 * 100 + 0.9 * 100 == 16.0 * 100); //true
+    System.out.println(16.1 * 100 + 0.9 * 100 == 17.0 * 100); //false
+    System.out.println((16.1 + 0.9) * 100 == 17.0 * 100); // true
+}
+
+{
+    float f1 = 1f / 3;
+    float f2 = 1f / 3;
+    System.out.println(f1 == f2); // true
+}
+
 ```
 
 # 基本结构

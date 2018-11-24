@@ -16,38 +16,38 @@
     <session id="937526516">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.10" value="2" />
+          <entry key="project.closed" value="10" />
+          <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="4" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="7" />
-          <entry key="java" value="14" />
+          <entry key="java" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="7" />
-          <entry key="JAVA" value="14" />
+          <entry key="JAVA" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="class" value="3" />
-          <entry key="java" value="2491" />
+          <entry key="java" value="2651" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="2491" />
+          <entry key="JAVA" value="2651" />
         </counts>
       </usages-collector>
     </session>
@@ -55,37 +55,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="643" column="4" selection-start-line="643" selection-start-column="4" selection-end-line="643" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/Calc.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/ConstDemo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.instrument/java/lang/instrument/ClassFileTransformer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="196" column="12" selection-start-line="196" selection-start-column="12" selection-end-line="204" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/ConstDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="134">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -93,10 +93,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            <state relative-caret-position="180">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1054#1055#0" expanded="true" />
+                <element signature="e#1081#1082#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -175,16 +177,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/FinallyDemo.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/ClassStuct.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/classloader/HelloLoader.java" />
-        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/TestStockDeep.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/LocalVarAndGC.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/Calc.java" />
         <option value="$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/ConstDemo.java" />
+        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java" />
+        <option value="$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java" />
       </list>
     </option>
   </component>
@@ -200,7 +202,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -211,7 +213,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -223,12 +224,6 @@
               <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
               <item name="jvm" type="616d4139:PackageViewModuleNode" />
               <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="jvm" type="58d84e3e:PackageViewProjectNode" />
-              <item name="jvm" type="616d4139:PackageViewModuleNode" />
-              <item name="cn.xiaowenjie" type="1f31426a:PackageElementNode" />
-              <item name="bytecode" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -285,13 +280,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="ClassFileTransformer&#9;PSI&#9;JAVA://java.lang.instrument.ClassFileTransformer&#10;Thread&#9;PSI&#9;JAVA://java.lang.Thread&#10;ClassLoader&#9;PSI&#9;JAVA://java.lang.ClassLoader&#10;Linkedbl&#9;PSI&#9;JAVA://java.util.concurrent.LinkedBlockingQueue" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542981135739" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543038154006" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -310,7 +306,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClassStuct">
+  <component name="RunManager" selected="Application.IEEE754">
     <configuration name="ClassStuct" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.xiaowenjie.ClassStuct" />
       <module name="jvm" />
@@ -326,6 +322,19 @@
     </configuration>
     <configuration name="FinallyDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.xiaowenjie.FinallyDemo" />
+      <module name="jvm" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.xiaowenjie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IEEE754" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.xiaowenjie.IEEE754" />
       <module name="jvm" />
       <extension name="coverage">
         <pattern>
@@ -364,33 +373,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestStockDeep" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.xiaowenjie.TestStockDeep" />
-      <module name="jvm" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.xiaowenjie.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="Application.TestStockDeep" />
       <item itemvalue="Application.LocalVarAndGC" />
       <item itemvalue="Application.FinallyDemo" />
       <item itemvalue="Application.StringInternDemo" />
       <item itemvalue="Application.ClassStuct" />
+      <item itemvalue="Application.IEEE754" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.IEEE754" />
         <item itemvalue="Application.ClassStuct" />
         <item itemvalue="Application.FinallyDemo" />
         <item itemvalue="Application.StringInternDemo" />
         <item itemvalue="Application.LocalVarAndGC" />
-        <item itemvalue="Application.TestStockDeep" />
       </list>
     </recent_temporary>
   </component>
@@ -413,18 +409,19 @@
       <workItem from="1542563290011" duration="78000" />
       <workItem from="1542725028601" duration="378000" />
       <workItem from="1542729191092" duration="158000" />
-      <workItem from="1542969625724" duration="4800000" />
+      <workItem from="1542969625724" duration="5419000" />
+      <workItem from="1543037589285" duration="564000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32330000" />
+    <option name="totallyTimeSpent" value="33513000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.15885022" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.16111952" />
       <window_info id="Structure" order="1" sideWeight="0.50163937" side_tool="true" weight="0.25340393" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -433,7 +430,7 @@
       <window_info id="Learn" order="6" weight="0.33509833" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.38360655" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19508196" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -482,13 +479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="90" selection-start-line="16" selection-start-column="80" selection-end-line="16" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/StringInternDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -517,13 +507,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
+    <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="13488">
+          <caret line="643" column="4" selection-start-line="643" selection-start-column="4" selection-end-line="643" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/Calc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/ConstDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -566,24 +567,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
+    <entry file="jar://D:/IDE/jdk-11.0.1/lib/src.zip!/java.instrument/java/lang/instrument/ClassFileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="643" column="4" selection-start-line="643" selection-start-column="4" selection-end-line="643" selection-end-column="4" />
+        <state relative-caret-position="513">
+          <caret line="196" column="12" selection-start-line="196" selection-start-column="12" selection-end-line="204" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/Calc.java">
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/classloader/FindClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        <state relative-caret-position="180">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1054#1055#0" expanded="true" />
+            <element signature="e#1081#1082#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/bytecode/ConstDemo.java">
+    <entry file="file://$PROJECT_DIR$/src/cn/xiaowenjie/IEEE754.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="134">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>

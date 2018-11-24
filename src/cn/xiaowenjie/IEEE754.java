@@ -8,7 +8,6 @@ public class IEEE754 {
         System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(f)));
 
 
-
         double d = -5;
 
         // double 的内部表示
@@ -17,5 +16,21 @@ public class IEEE754 {
         System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(Float.MIN_NORMAL)));
         System.out.println(Long.toBinaryString(Double.doubleToRawLongBits(Double.MIN_NORMAL)));
 
+        // 浮点数的大小比较为什么不能用等号？
+        {
+            float f1 = 0.1f;
+            float f2 = 0.1f;
+
+            System.out.println(f1 == f2); // true
+            System.out.println(15.1 * 100 + 0.9 * 100 == 16.0 * 100); //true
+            System.out.println(16.1 * 100 + 0.9 * 100 == 17.0 * 100); //false
+            System.out.println((16.1 + 0.9) * 100 == 17.0 * 100); // true
+        }
+
+        {
+            float f1 = 1f / 3;
+            float f2 = 1f / 3;
+            System.out.println(f1 == f2); // true
+        }
     }
 }

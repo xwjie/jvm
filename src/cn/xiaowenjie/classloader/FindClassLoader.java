@@ -27,5 +27,6 @@ public class FindClassLoader {
     }
 
     private static byte[] loadClassBytes(String s) {
+        return null;
     }
 }
