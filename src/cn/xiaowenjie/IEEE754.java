@@ -22,8 +22,18 @@ public class IEEE754 {
             float f2 = 0.1f;
 
             System.out.println(f1 == f2); // true
+
+            // 默认是 double
             System.out.println(15.1 * 100 + 0.9 * 100 == 16.0 * 100); //true
+
+            // 默认是 double
             System.out.println(16.1 * 100 + 0.9 * 100 == 17.0 * 100); //false
+
+            // float
+            System.out.println(16.1f * 100 + 0.9f * 100 == 17.0f * 100); //true
+
+            System.out.println(Float.compare(16.1f * 100 + 0.9f * 100, 17.0f * 100)); //0
+
             System.out.println((16.1 + 0.9) * 100 == 17.0 * 100); // true
         }
 
