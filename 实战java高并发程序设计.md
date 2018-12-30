@@ -169,3 +169,77 @@ for(int i = 0; i<50; i++){
 }
 
 ```
+
+## 线程池
+
+### 重点方法
+
+### 任务提交逻辑
+
+- 小于coresize，提交任务分配线程执行 addWorker(command, true)
+- 大于coresize，提交队列执行 workQueue.offer(command)
+  - 成功，等待执行
+  - 失败
+    - 提交线程池   addWorker(command, false) ，是否达到max 线程
+      - 没达到，分配线程执行
+      - 达到：执行拒绝策略
+
+### 四种拒绝策略
+
+###  线程池扩展
+
+beforeExecute、afterExecute、terminated
+
+### 线程池的异常
+
+如果用submit提交任务，任务异常的时候，不调用get是不会知道的
+
+调用Execute则可以。
+
+```java
+
+public void execute(Runnable command)
+
+public Future<?> submit(Runnable task)
+
+public <T> Future<T> submit(Runnable task, T result)
+
+public <T> Future<T> submit(Callable<T> task) 
+
+```
+
+### guava 的 MoreExecutors 扩展线程池
+
+[guava异步增强——ListenableFuture](https://www.jianshu.com/p/9c57aa5e34af)
+
+[Guava并发：ListenableFuture与RateLimiter示例](https://my.oschina.net/cloudcoder/blog/359598)
+
+
+## ConurrentLinkedQueue 
+
+## SkipList 跳表是有序的
+
+
+
+# JMH 性能测试工具使用
+
+# 锁优化
+
+## AtomicStampedReference ABA 问题 
+
+为了解决ABA问题，伟大的java为我们提供了AtomicMarkableReference和AtomicStampedReference类，为我们解决了问题
+
+
+[Java多线程：AtomicReference AtomicStampedReference AtomicMarkableReference 原子更新引用类型](https://www.cnblogs.com/2015110615L/p/6749608.html)
+
+[关于AtomicStampedReference使用的坑](https://blog.csdn.net/xybz1993/article/details/79992120)
+
+## 数组无锁 AtmoicIntergerArray
+
+## 普通变量享受原子操作 AtomicIntegerFieldUpdater
+
+AtomicIntegerFieldUpdater:  基于反射的工具，可用CompareAndSet对volatile int进行原子更新:
+
+[AtomicIntegerFieldUpdater](https://blog.csdn.net/liyantianmin/article/details/53144939)
+
+[AtomicIntegerFieldUpdater使用](http://www.cnblogs.com/hithlb/p/4516078.html)
