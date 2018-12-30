@@ -1,0 +1,171 @@
+# 实战java高并发程序设计
+
+葛一鸣
+
+> 由于大部分知识我都已经掌握，这里只记录一些关键点，加深印象。本篇笔记并不适合初学者。
+
+# 线程
+
+## 三种地方可能会导致指令重排：
+
+* 编译器优化的重排序
+* 指令级并行的重排序（指令级并行技术（Instruction-Level
+Parallelism， ILP）来将多条指令重叠执行）
+* 内存系统的重排序（处理器使用缓存和读/写缓冲区）
+
+cpu的重排是因为cpu指令流水线的存在。
+
+## 线程的stop函数可能导致数据不一致问题
+
+stop会直接终止线程，并立即释放线程持有的锁。假如你代码里面获取锁然后做几个步骤，如果调用stop之后，可能里面的几个步骤只执行了其中几个就结束了！
+
+线程退出的正确方法是 run 函数执行结束。一般加个 volatile 的标志位，其他地方修改。
+
+或者使用中断检测，也是标志位。
+
+## 线程的yield函数
+
+> yield:  放弃，屈服; 生利; 退让，退位;
+
+Thread.yield()方法作用是：暂停当前正在执行的线程对象，并执行其他线程。
+
+> 使当前线程从执行状态（运行状态）变为可执行态（就绪状态）。
+
+“我已经完成一些重要的工作了，我休息一下，给你们一个机会。”
+
+## 线程中断 interrupt
+
+只是给线程发送一个通知，告知目标线程，有人希望你退出，至于目标线程是否退出，完全有目标线程决定。
+
+```java
+public void interrupt() // 中断线程
+public boolean isInterrupted() // 判断是否被中断
+public boolean interrupted() // 判断是否被中断。被清除中断状态
+
+```
+
+## 线程 wait 和 notify
+
+注意不是线程的方法，而是对象的方法。是在monitor上面调用的。
+
+> 不要调用线程对象的 wait和notify，可能会影响系统api工作。
+
+wait： 释放监视器，然后等待监视器，拿到监视器之后再继续执行。
+
+notify：释放监视器。但是，需要等待synchronize块结束，其他线程才能得到，不是一调用其他线程就可以得到monitor。
+
+## 线程的join
+
+jdk实现 while (isAlive()) { wait(0);  }
+
+```java
+public final synchronized void join(long millis)
+    throws InterruptedException {
+    long base = System.currentTimeMillis();
+    long now = 0;
+
+    if (millis < 0) {
+        throw new IllegalArgumentException("timeout value is negative");
+    }
+
+    if (millis == 0) {
+        while (isAlive()) {
+            wait(0);
+        }
+    } else {
+        while (isAlive()) {
+            long delay = millis - now;
+            if (delay <= 0) {
+                break;
+            }
+            wait(delay);
+            now = System.currentTimeMillis() - base;
+        }
+    }
+}
+```
+
+## 线程组
+
+统一管理，统一命名。
+
+```java
+public int activeCount()
+```
+
+## hashmap jdk8 已经修复并发时的死循环问题，只会导致数据不一致不会死循环
+
+
+# jdk 并发包
+
+## 重入锁
+
+### 中断响应  lockInterruptibly() 解决死锁问题
+
+### tryLock 获取不到立刻返回false / tryLock(time) 
+
+```java
+if(lock.tryLock()){
+
+}
+```
+
+### 公平锁
+
+### Condition 看 ArrayBlockingQueue 代码 
+
+
+## 信号量
+
+关注重要的方法和构造函数。
+
+## 读写锁
+
+多个读，一个写
+
+```java
+private static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+private static Lock readLock = lock.readLock();
+private static Lock writeLock = lock.writeLock();
+
+```
+
+## 倒计数器 CountDownLatch
+
+主线程在 CountDownLatch上等待，所有准备好后继续执行
+
+## 循环栅栏 CyclicBarrier
+
+CyclicBarrier是执行线程内等待。CountDownLatch是线程外（主线程）等待
+
+
+## LockSupport 上的重要方法
+
+## Guava 和 RateLimiter 限流
+
+- 漏桶算法
+  - 先缓存请求到缓存区，然后固定流速留出缓存区
+- 令牌桶算法
+  - 缓存区缓存的不是请求，而是令牌。算法每一个单位时间产生令牌放到缓存区，处理程序拿到令牌后才能处理。
+  - 没有令牌就丢弃或者等待。
+
+```java
+static RateLimiter limiter = RateLimiter.create(2);// 每秒2个令牌（处理2个请求）
+
+for(int i = 0; i<50; i++){
+    // 等待
+    limiter.acquire();
+    // dosomething
+}
+
+
+for(int i = 0; i<50; i++){
+    // 丢弃
+    if(limiter.tryAcquire()){
+        continue;
+    }
+    // dosomething
+}
+
+```

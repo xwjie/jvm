@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - IEEE754",
+            "request": "launch",
+            "mainClass": "xiaowenjie.IEEE754",
+            "projectName": "jvm_68cc5fa6"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ThreadWaitNotify",
+            "request": "launch",
+            "mainClass": "xiaowenjie.ThreadWaitNotify",
+            "projectName": "jvm_68cc5fa6"
+        }
+    ]
+}
