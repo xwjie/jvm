@@ -434,3 +434,200 @@ public static void main(String[] args) throws InterruptedException, ExecutionExc
 
 ### 异常处理
 
+exceptionally 处理异常，返回（默认）值
+
+```java
+public class Demo4 {
+
+    public static int test(int i) {
+       return i / 0;
+    }
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        System.out.println("start...");
+
+        CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> test(2))
+                .exceptionally(e -> {
+                    e.printStackTrace();
+                    return -1;
+                })
+                .thenApply(s -> s + "函数接口，加个尾巴")
+                .thenAccept(System.out::println);
+
+        System.out.println("end..." + future.get());
+    }
+}
+```
+
+### 组合多个 CompletableFuture 
+
+```java
+
+    public <U> CompletableFuture<U> thenCompose(
+        Function<? super T, ? extends CompletionStage<U>> fn) {
+        return uniComposeStage(null, fn);
+    }
+
+    public <U> CompletableFuture<U> thenComposeAsync(
+        Function<? super T, ? extends CompletionStage<U>> fn) {
+        return uniComposeStage(asyncPool, fn);
+    }
+
+    public <U> CompletableFuture<U> thenComposeAsync(
+        Function<? super T, ? extends CompletionStage<U>> fn,
+        Executor executor) {
+        return uniComposeStage(screenExecutor(executor), fn);
+    }
+
+    public <U,V> CompletableFuture<V> thenCombine(
+        CompletionStage<? extends U> other,
+        BiFunction<? super T,? super U,? extends V> fn) {
+        return biApplyStage(null, other, fn);
+    }
+
+    public <U,V> CompletableFuture<V> thenCombineAsync(
+        CompletionStage<? extends U> other,
+        BiFunction<? super T,? super U,? extends V> fn) {
+        return biApplyStage(asyncPool, other, fn);
+    }
+
+    public <U,V> CompletableFuture<V> thenCombineAsync(
+        CompletionStage<? extends U> other,
+        BiFunction<? super T,? super U,? extends V> fn, Executor executor) {
+        return biApplyStage(screenExecutor(executor), other, fn);
+    }
+
+```
+
+### 支持timeout （jkd9）
+
+orTimeOut
+
+
+
+## 读写锁的改进： StampedLock
+
+读写锁：悲观锁，读锁会阻塞写锁。可能引起写线程的“饥饿”。
+
+StampedLock 乐观的读策略。
+
+先 `long stamp = sl.tryOptimisticRead()` 获取乐观读， 然后校验 `sl.validate(stamp)`， 失败则 `sl.readLock()` 获取悲观读。
+
+```java
+public class StampedLockDemo {
+    private double x, y;
+    
+    private final StampedLock sl = new StampedLock();
+
+    // an exclusively locked method
+    void move(double deltaX, double deltaY) { 
+        long stamp = sl.writeLock();
+        try {
+            x += deltaX;
+            y += deltaY;
+        } finally {
+            sl.unlockWrite(stamp);
+        }
+    }
+
+    // 下面看看乐观读锁案例
+    // A read-only method
+    double distanceFromOrigin() { 
+        long stamp = sl.tryOptimisticRead(); // 获得一个乐观读锁
+     
+        double currentX = x, currentY = y; // 将两个字段读入本地局部变量
+     
+        // 检查发出乐观读锁后同时是否有其他写锁发生？
+        if (!sl.validate(stamp)) { 
+            // 如果没有，我们再次获得一个读悲观锁
+            stamp = sl.readLock(); 
+    
+            try {
+                currentX = x; // 将两个字段读入本地局部变量
+                currentY = y; // 将两个字段读入本地局部变量
+            } finally {
+                sl.unlockRead(stamp);
+            }
+        }
+
+        return Math.sqrt(currentX * currentX + currentY * currentY);
+    }
+
+    // 下面是悲观读锁案例
+    // upgrade
+    void moveIfAtOrigin(double newX, double newY) { 
+        // Could instead start with optimistic, not read mode
+        long stamp = sl.readLock();
+
+        try {
+            // 循环，检查当前状态是否符合
+            while (x == 0.0 && y == 0.0) { 
+            
+                // 将读锁转为写锁
+                long ws = sl.tryConvertToWriteLock(stamp); 
+            
+                // 这是确认转为写锁是否成功
+                if (ws != 0L) { 
+                    stamp = ws; // 如果成功 替换票据
+                    x = newX; // 进行状态改变
+                    y = newY; // 进行状态改变
+                    break;
+                } 
+                // 如果不能成功转换为写锁
+                else { 
+                    sl.unlockRead(stamp); // 我们显式释放读锁
+                    stamp = sl.writeLock(); // 显式直接进行写锁 然后再通过循环再试
+                }
+            }
+        } finally {
+            sl.unlock(stamp); // 释放读锁或写锁
+        }
+    }
+}
+```
+
+[Java 8新特性探究（十）StampedLock将是解决同步问题的新宠](http://www.importnew.com/14941.html)
+
+[Java并发编程之StampedLock锁源码探究](https://juejin.im/entry/5b28a4c46fb9a00e8a3e534a)
+
+- CLH 锁，自旋锁
+- FIFO
+- 不可重入
+  
+## 原子类增强
+
+### 更快的原子类：LongAdder
+
+### LongAdder功能的增强版：LongAccumulator
+
+
+## ConcurrentHashMap 的增强
+
+### 一堆 foreach 函数
+
+### 一堆 reduce 操作
+
+### 条件插入 computeIfAbsent
+
+### 一堆 search 操作
+
+### mappingCount 
+
+- 返回 long，size 返回 int
+- 并发的时候不一定精确
+
+### newKeySet 返回一个set
+
+
+
+# Akka 构建高并发程序
+
+Scala语音
+
+## 新并发模型 actor 
+
+基本执行单元。比喻成一个人。
+
+
+
+
