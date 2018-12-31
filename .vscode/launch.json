@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Demo3",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.completablefuturedemos.Demo3",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Demo1",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.completablefuturedemos.Demo1",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ThreadWaitNotify",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.ThreadWaitNotify",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GuavaFutureDemo",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.GuavaFutureDemo",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - IEEE754",
             "request": "launch",
             "mainClass": "xiaowenjie.IEEE754",

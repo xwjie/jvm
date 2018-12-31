@@ -243,3 +243,194 @@ AtomicIntegerFieldUpdater:  基于反射的工具，可用CompareAndSet对volati
 [AtomicIntegerFieldUpdater](https://blog.csdn.net/liyantianmin/article/details/53144939)
 
 [AtomicIntegerFieldUpdater使用](http://www.cnblogs.com/hithlb/p/4516078.html)
+
+
+
+
+# 并行模式与算法
+
+## 单例模式
+
+内部类
+
+## 不变模式
+
+final class， 只有get方法，构造函数赋值。
+
+## 生产消费者模式
+
+使用 blockingqueue 实现
+
+## 高性能的生产-消费者模式：无锁实现
+
+- ConcurrentLinkedQueue
+- Disruptor
+  - RingBuffer, 环形，不需要head和tail，只需要一个cursor
+  - 读写数据使用CAS
+  - 完全内存复用，不会分配和回收内存
+
+
+[高性能队列Disruptor的使用](https://www.jianshu.com/p/8473bbb556af)
+
+```java
+// 发布事件；
+RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
+long sequence = ringBuffer.next();//请求下一个事件序号；
+
+try {
+    LongEvent event = ringBuffer.get(sequence);//获取该序号对应的事件对象；
+    long data = getEventData();//获取要通过事件传递的业务数据；
+    event.set(data);
+} finally{
+    ringBuffer.publish(sequence);//发布事件；
+}
+```
+
+## cpu cache 伪共享
+
+## Future 模式
+
+订单/契约
+
+[Java多线程 - Future模式](https://www.jianshu.com/p/949d44f3d9e3)
+
+## guava 对 future的支持
+
+### 增加回调
+
+[Guava包中的ListenableFuture详情解析](https://blog.csdn.net/qq496013218/article/details/77522820)
+
+```java
+public class GuavaFutureDemo {
+
+    public static void main(String[] args) {
+        ListeningExecutorService service = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
+        com.google.common.util.concurrent.ListenableFuture<Object> task = service.submit(new Callable<Object>() {
+            public Object call() {
+                return "回调参数success";
+            }
+        });
+
+        task.addListener(() -> {
+            try {
+                System.out.println("done," + task.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+			}            
+        }, MoreExecutors.directExecutor());
+
+
+        Futures.addCallback(task, new FutureCallback<Object>() {
+            @Override
+            public void onSuccess(Object result) {
+                System.out.println("result = " + result);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                System.out.println("t = " + t);
+
+            }
+        }, MoreExecutors.directExecutor()); // MoreExecutors.newDirectExecutorService()
+    }
+}
+```
+
+[通过实例理解 JDK8 的 CompletableFuture](https://www.ibm.com/developerworks/cn/java/j-cf-of-jdk8/index.html)
+
+## 并行
+
+### 希尔排序
+
+希尔排序也是一种`插入排序`，它是简单插入排序经过改进之后的一个更高效的版本，也称为`缩小增量排序`，同时该算法是冲破O(n2）的第一批算法之一。
+
+[图解排序算法(二)之希尔排序](https://www.cnblogs.com/chengxiao/p/6104371.html)
+
+> 由于分组，可以并行
+
+## 准备好了通知我： NIO
+
+## 读完了在通知我：AIO
+
+NIO还是同步的，AIO则是异步。
+
+## CompletableFuture
+
+### 完成了就通知我
+
+future.complete(结果)
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    CompletableFuture<String> future = new CompletableFuture<>();
+
+    System.out.println("start...");
+    
+    new Thread(() -> {
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }).start();
+
+    // 模拟耗时
+    Thread.sleep(1000);
+
+    // 告知完成
+    future.complete("我做完了");
+}
+```
+
+### 异步执行
+
+
+
+```java
+public static void main(String[] args) throws InterruptedException, ExecutionException {
+    System.out.println("start...");
+
+    CompletableFuture<String> future = CompletableFuture.supplyAsync(()->{
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "开启异步任务";
+    });
+
+    System.out.println("end..." + future.get());
+}
+```
+
+
+```java
+// 有返回值，输入提供者
+public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier) 
+public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier,  Executor executor) 
+
+// runAsync 没有返回值，传入 runnable
+public static CompletableFuture<Void> runAsync(Runnable runnable, Executor executor) 
+public static CompletableFuture<Void> runAsync(Runnable runnable)
+``` 
+
+### 流式调用
+
+then。。。
+
+```java
+public static void main(String[] args) throws InterruptedException, ExecutionException {
+    System.out.println("start...");
+
+    CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> test())
+            .thenApply(s -> s + "函数接口，加个尾巴")
+            .thenAccept(System.out::println);
+
+    System.out.println("end..." + future.get());
+}
+```
+
+### 异常处理
+
