@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SemaphorePVDemo",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.SemaphorePVDemo",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Demo4",
             "request": "launch",
             "mainClass": "cn.xiaowenjie.completablefuturedemos.Demo4",
