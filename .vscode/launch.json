@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - AkkaQuickstart",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.akka.sample.AkkaQuickstart",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "cn.xiaowenjie.akka.Main",
+            "projectName": "jvm"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SemaphorePVDemo",
             "request": "launch",
             "mainClass": "cn.xiaowenjie.SemaphorePVDemo",

@@ -4,7 +4,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 利用semaphore的先V（release）再P（acquire）操作，实现线程的前置依赖关系
+ * 利用semaphore的先V（release）再P（acquire）操作，实现线程的前置依赖关系。
+ * semaphore的容量是0
  */
 public class SemaphorePVDemo {
 
